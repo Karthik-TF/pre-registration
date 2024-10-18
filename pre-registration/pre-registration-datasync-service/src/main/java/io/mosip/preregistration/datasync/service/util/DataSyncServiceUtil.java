@@ -255,6 +255,18 @@ public class DataSyncServiceUtil {
 	 */
 	@Value("${poco.url}")
 	private String pocoUrl;
+	
+	/**
+	 * Reference for ${poosd.url} from property file
+	 */
+	@Value("${poosd.url}")
+	private String poosdUrl;
+	
+	/**
+	 * Reference for ${poabd.url} from property file
+	 */
+	@Value("${poabd.url}")
+	private String poabdUrl;
 
 	/**
 	 * Reference for ${booking.resource.url} from property file
@@ -741,9 +753,23 @@ public class DataSyncServiceUtil {
 
 				}
 
-				else if (documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POD.getCode())
-						|| documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POB.getCode())) {
+				else if (documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POD.getCode())) {
 					jsonObject.put(podUrl, prepareDocumentMetaData(documentMultipartResponseDTO));
+				}
+				
+				else if (documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POB.getCode())) {
+					jsonObject.put(pobUrl, prepareDocumentMetaData(documentMultipartResponseDTO));
+
+				}
+				
+				else if (documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POABD.getCode())) {
+					jsonObject.put(poabdUrl, prepareDocumentMetaData(documentMultipartResponseDTO));
+
+				}
+				
+				else if (documentMultipartResponseDTO.getDocCatCode().equals(RequestCodes.POOSD.getCode())) {
+					jsonObject.put(poosdUrl, prepareDocumentMetaData(documentMultipartResponseDTO));
+
 				}
 
 				DocumentDTO documentDTO = getDocBytesDetails(documentMultipartResponseDTO.getDocumentId(), preId);
